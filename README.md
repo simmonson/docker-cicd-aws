@@ -1,4 +1,4 @@
-# Frontend for production-grade docker demo
+# Demo for CICD using Travis CI
 
 ## Instructions
 • Using `Dockerfile.dev` for development startup    
@@ -133,4 +133,4 @@ Now that we defined our `Dockerfile`, we can test the prod process:
 • Port 80 is the default port for nginx, so that's what we map it to
 
 
-# Continuous Integration and Deployment using AWS
+# Continuous Integration and Deployment using Travis CI
