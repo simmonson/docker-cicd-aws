@@ -20,6 +20,9 @@ function App() {
           learn react
         </a>
       </header>
+      <div>
+        some feature here
+      </div>
     </div>
   );
 }
