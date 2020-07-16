@@ -162,7 +162,10 @@ and enviornment variables in Docker here:
 https://docs.docker.com/engine/reference/run/#env-environment-variables
 
 #### Good to know
-On our local machine, running `docker run containerId npm run test` executes the test, but the result of that is just the test suite waiting for an input and hangs. It will timeout and exit eventually, and TravisCI will interpret any result that's not exit code 0 to be a failure. So to run our test, we need to modify this command (see NOTE above).
+On our local machine, running `docker run containerId npm run test` executes the test, but the result of that is just the test suite waiting for an input and hangs. It will timeout and exit eventually, and TravisCI will interpret any result that's not exit code 0 to be a failure. So to run our test, we need to modify this command. See image below for pipeline steps:
+![travis-ci-pipeline](./readme-images/travis-ci-pipeline.png "travis-ci-pipeline")
 
 So running `docker run -e CI=true simmonson/docker-cicd-aws npm run test` will run the test, and return a status code upon completion of its test suites. TravisCI only cares about the output result of this status code, so if all tests pass, it will return a successful 0 exit code.
 
+After defining the yml file, we can push the changes to the github branch, and TravisCI should take over from here. You can look at your repository on TravisCI dashboard and see the build and test run process:
+![travis-ci-process](./readme-images/travis-ci-process.png "travis-ci-process")
