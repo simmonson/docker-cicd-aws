@@ -169,3 +169,23 @@ So running `docker run -e CI=true simmonson/docker-cicd-aws npm run test` will r
 
 After defining the yml file, we can push the changes to the github branch, and TravisCI should take over from here. You can look at your repository on TravisCI dashboard and see the build and test run process:
 ![travis-ci-process](./readme-images/travis-ci-process.png "travis-ci-process")
+
+# Using AWS Elastic Beanstalk
+We are using this as our deployment platform. In order to do something after Travis CI pipeline is successful, we need to setup the AWS account, as well as make additional `deploy` configurations to `.travis.yml` file.
+```
+provider: elasticbeanstalk // deployment provider
+  region: "us-west-2" // region as specified
+  app: "docker-cicd-aws" // app name created in beanstalk
+  env: "DockerCicdAws-env" // env automatically generated when creating app in beanstalk
+  bucket_name: "elasticbeanstalk-us-west-2-720252850272" // bucket name is found by searching the S3 bucket automatically generated 
+  bucket_path: "docker-cicd-aws" // the s3 bucket specified has multiple paths. define one here using the same name as app
+  on:
+    branch: master // deploy to aws beanstalk when master branch on github is updated
+```
+
+#### Good to know
+Need configs set up like below for `.travis.yml` file:
+```
+access_key_id: $AWS_ACCESS_KEY
+secret_access_key: $AWS_SECRET_KEY
+```

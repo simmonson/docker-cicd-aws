@@ -7,3 +7,13 @@ before_install:
 
 script:
   - docker run -e CI=true simmonson/docker-cicd-aws npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "docker-cicd-aws"
+  env: "DockerCicdAws-env"
+  bucket_name: "elasticbeanstalk-us-west-2-720252850272"
+  bucket_path: "docker-cicd-aws"
+  on:
+    branch: master
